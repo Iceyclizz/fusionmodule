@@ -1,0 +1,10 @@
+{
+    "name": "fusionmodule",
+    "title":"ModuloFusion",
+    "description":"Modulo para añadir a foundry y tener nuestras cosillas",
+    "author":"Iceyclizz",
+    "version":"0.0.1",
+    "minimumCoreVersion":"0.6.0",
+    "compatibleCoreVersion":"0.6.4",
+    "esmodules":["./dado.js"]
+}
