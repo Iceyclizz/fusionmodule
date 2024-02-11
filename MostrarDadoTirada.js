@@ -6,15 +6,22 @@ Hooks.on("renderChatMessage", (message, html, messageData) => {
         $(html).find(".dice-total").prepend("<span style='float:left';>(" + roll + ")</span>");
     }
     else if ($(html).find("a.inline-roll.inline-result").length) {
-        var objArray=$(html).find("a.inline-roll.inline-result");
+        var objArray = $(html).find("a.inline-roll.inline-result");
         for (let index = 0; index < objArray.length; index++) {
             var roll = JSON.parse(decodeURIComponent(objArray.eq(index).attr("data-roll")));
-            var found=-1;
-            for (let i = 0; i < roll.terms.length; i++) {
-                if (roll.terms[i].class=="Die" && (found==-1))
-                    found=i;
+            var found = -1;
+            if (roll.dice.length > 0) {
+                for (let i = 0; i < roll.dice.length; i++) {
+                    if (roll.dice[i].class == "Die" && (found == -1))
+                        found = roll.dice[i].results[0].result;
+                }
+            } else {
+                for (let i = 0; i < roll.terms.length; i++) {
+                    if (roll.terms[i].class == "Die" && (found == -1))
+                        found = roll.terms[i].results[0].result;
+                }
             }
-            if (found!=-1) roll= "(" +roll.terms[found].results[0].result+ ")";
+            if (found != -1) roll = "(" + found + ")";
             else roll = "";
             objArray.eq(index).find("i").append(roll);
         }
