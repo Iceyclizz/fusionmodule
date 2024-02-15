@@ -21,9 +21,9 @@ Hooks.on("renderChatMessage", (message, html, messageData) => {
                         found = roll.terms[i].results[0].result;
                 }
             }
-            if (found != -1) roll = "(" + found + ")";
+            if (found != -1) roll = "(" + found + ") ";
             else roll = "";
-            objArray.eq(index).find("i").append(roll);
+            objArray.eq(index).find("i").after(roll);
         }
     }
     console.log(html.html());
